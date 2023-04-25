@@ -11,6 +11,8 @@ Objective: Have a button on the screen that destroys an object in game if presse
 
 ## Preparation:
 
+![image](https://user-images.githubusercontent.com/12215115/234275961-52077904-9dae-4091-8282-6554e6064b21.png)
+
 - Project Settings > Maps and Modes
   - Default GameMode: BP_DestroyButtonGameModeBase
   - Default Pawn Class: Default Pawn
