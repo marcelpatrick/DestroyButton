@@ -130,3 +130,11 @@ void AMyPlayerController::DestroyWidget()
 - In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed:
 
 ![image](https://user-images.githubusercontent.com/12215115/234263624-6e413c4c-4e5d-43b2-9ff5-fadafe775bd9.png)
+
+### MyWidget Class:
+- In the widget Blueprint, include a button and customize it
+- Add a OnClicked event. On the Event graph get the player controller and call its function Destroy() OnClicked.
+
+![image](https://user-images.githubusercontent.com/12215115/234274689-3a5b0a48-4cf0-4641-b468-a0c92a0add32.png)
+
+
