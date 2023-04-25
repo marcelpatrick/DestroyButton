@@ -125,5 +125,6 @@ void AMyPlayerController::DestroyWidget()
 }
 ```
 ### MyActor class:
-- In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed
+- In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed:
+
 ![image](https://user-images.githubusercontent.com/12215115/234263624-6e413c4c-4e5d-43b2-9ff5-fadafe775bd9.png)
