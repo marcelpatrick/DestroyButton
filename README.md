@@ -124,6 +124,8 @@ void AMyPlayerController::DestroyWidget()
     MyPawn->Destroy();
 }
 ```
+- Import an emitter to the project
+
 ### MyActor class:
 - In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed:
 
