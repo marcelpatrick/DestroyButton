@@ -11,13 +11,20 @@ Objective: Have a button on the screen that destroys an object in game if presse
 
 ## Preparation:
 
-![image](https://user-images.githubusercontent.com/12215115/234275961-52077904-9dae-4091-8282-6554e6064b21.png)
+![image](https://user-images.githubusercontent.com/12215115/234550311-901ebeca-efb1-44b3-8d33-e41977fe22a8.png)
 
 - Project Settings > Maps and Modes
   - Default GameMode: BP_DestroyButtonGameModeBase
   - Default Pawn Class: Default Pawn
   - Player Controller Class: BP_MyPlayerController
   
+- Import an emitter to the project
+
+### MyActor class:
+- In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed:
+
+![image](https://user-images.githubusercontent.com/12215115/234263624-6e413c4c-4e5d-43b2-9ff5-fadafe775bd9.png)
+
 ### GameModeBase Class:
 - In the header file, declare a class object of type UUserWidget and expose it to the GameModeBase Blueprint
 ```cpp
@@ -126,17 +133,11 @@ void AMyPlayerController::DestroyWidget()
     MyPawn->Destroy();
 }
 ```
-- Import an emitter to the project
-
-### MyActor class:
-- In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed:
-
-![image](https://user-images.githubusercontent.com/12215115/234263624-6e413c4c-4e5d-43b2-9ff5-fadafe775bd9.png)
 
 ### MyWidget Class:
 - In the widget Blueprint, include a button and customize it
 - Add a OnClicked event. On the Event graph get the player controller and call its function Destroy() OnClicked.
 
-![image](https://user-images.githubusercontent.com/12215115/234550217-90cd98f3-cfec-4317-b650-32184b81a8b6.png)
+![image](https://user-images.githubusercontent.com/12215115/234550380-e3964928-49ef-45d0-9457-798d54eed947.png)
 
 
