@@ -137,6 +137,6 @@ void AMyPlayerController::DestroyWidget()
 - In the widget Blueprint, include a button and customize it
 - Add a OnClicked event. On the Event graph get the player controller and call its function Destroy() OnClicked.
 
-![image](https://user-images.githubusercontent.com/12215115/234274689-3a5b0a48-4cf0-4641-b468-a0c92a0add32.png)
+![image](https://user-images.githubusercontent.com/12215115/234550217-90cd98f3-cfec-4317-b650-32184b81a8b6.png)
 
 
