@@ -6,7 +6,7 @@ Objective: Have a button on the screen that destroys an object in game if presse
 
 - Create an AActor C++ class MyActor and a Blueprint based on that
 - Create a PlayerController C++ class MyPlayerController and a Blueprint based on that
-- Create a WidgetBlueprint C++ class MyWidgetBlueprint and a Blueprint based on that 
+- Create a WidgetBlueprint: Right click > User Interface > Widget Blueprint
 - Create a Blueprint based on the game's GameModeBase
 
 ## Preparation:
