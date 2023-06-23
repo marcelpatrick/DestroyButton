@@ -26,7 +26,7 @@ Objective: Have a button on the screen that destroys an object in game if presse
 ![image](https://user-images.githubusercontent.com/12215115/234263624-6e413c4c-4e5d-43b2-9ff5-fadafe775bd9.png)
 
 ### GameModeBase Class:
-- In the header file, declare a class object of type UUserWidget and expose it to the GameModeBase Blueprint
+- In the header file, declare a reference to a class type of type UUserWidget and expose it to the GameModeBase Blueprint
 ```cpp
 #include "Blueprint/UserWidget.h"
 
