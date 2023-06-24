@@ -2,6 +2,10 @@
 
 Objective: Have a button on the screen that destroys an object in game if pressed
 
+## Visual Summary: 
+
+![image](https://user-images.githubusercontent.com/12215115/234550311-901ebeca-efb1-44b3-8d33-e41977fe22a8.png)
+
 ## Ingridients:
 
 - Create an AActor C++ class MyActor and a Blueprint based on that
@@ -12,8 +16,6 @@ Objective: Have a button on the screen that destroys an object in game if presse
 - Import an emitter to the project
   
 ## Preparation:
-
-![image](https://user-images.githubusercontent.com/12215115/234550311-901ebeca-efb1-44b3-8d33-e41977fe22a8.png)
 
 - in [projectname].build.cs:
   - Include "UMG" inside PublicDependenciesModuleNames
