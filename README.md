@@ -5,20 +5,26 @@ Objective: Have a button on the screen that destroys an object in game if presse
 ## Ingridients:
 
 - Create an AActor C++ class MyActor and a Blueprint based on that
+  - in the BP include a mesh and place it into the world (this will be the object to be destroyed)
 - Create a PlayerController C++ class MyPlayerController and a Blueprint based on that
 - Create a WidgetBlueprint: Right click > User Interface > Widget Blueprint
 - Create a Blueprint based on the game's GameModeBase
-
+- Import an emitter to the project
+  
 ## Preparation:
 
 ![image](https://user-images.githubusercontent.com/12215115/234550311-901ebeca-efb1-44b3-8d33-e41977fe22a8.png)
 
+- in [projectname].build.cs:
+  - Include "UMG" inside PublicDependenciesModuleNames
+  - Uncomment where it sayas "incomment if using Slate UI"
+    
 - Project Settings > Maps and Modes
   - Default GameMode: BP_DestroyButtonGameModeBase
   - Default Pawn Class: Default Pawn
-  - Player Controller Class: BP_MyPlayerController
-  
-- Import an emitter to the project
+  - Player Controller Class: BP_MyPlayerController]
+    
+## COOKING:
 
 ### MyActor class:
 - In the Actor Blueprint, include a mesh to it and in the Event Graph, OnEventDestroyed Spawn an emitter at the location where the mesh was destroyed:
