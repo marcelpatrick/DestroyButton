@@ -34,50 +34,50 @@ Objective: Have a button on the screen that destroys an object in game if presse
 ![image](https://user-images.githubusercontent.com/12215115/234263624-6e413c4c-4e5d-43b2-9ff5-fadafe775bd9.png)
 
 ### GameModeBase Class:
-- In the header file, declare a variable to be a reference to the class type UUserWidget and expose it to the GameModeBase Blueprint
+- In the header file,
+- Define BeginPlay()
+- declare a variable to be a reference to the class type UUserWidget and expose it to the GameModeBase Blueprint
+  
 ```cpp
 #include "Blueprint/UserWidget.h"
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "DontDestroyMeGameModeBase.generated.h"
+#include "ExplodeButtonGameModeBase.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class DONTDESTROYME_API ADontDestroyMeGameModeBase : public AGameModeBase
+class EXPLODEBUTTON_API AExplodeButtonGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MyWidgetClassType") 
+	TSubclassOf<UUserWidget> MyUserWidgetClassType;
 	
-public: 
-	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "My Widget")
-	TSubclassOf<UUserWidget> MyWidget;
-
 };
 ```
 
-- In the cpp file, create a widget and add it to the viewport
+- In the cpp file,
+- Define BeginPlay() and inherit its properties from the parent function with Super::
+- create a widget and add it to the viewport
+  
 ```cpp
-#include "DontDestroyMeGameModeBase.h"
+#include "ExplodeButtonGameModeBase.h"
 
-
-void ADontDestroyMeGameModeBase::BeginPlay()
+void AExplodeButtonGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
 
-    if (MyWidget != nullptr)
+    if (MyUserWidgetClassType != nullptr)
     {
-        //Create the widget in the world
-        UUserWidget* MyCurrentWidget = CreateWidget<UUserWidget>(GetWorld(), MyWidget);
+        UUserWidget* MyWidget = CreateWidget(GetWorld(), MyUserWidgetClassType);
 
-        if (MyCurrentWidget != nullptr)
+        if (MyWidget != nullptr)
         {
-            //Add widget to the viewport
-            MyCurrentWidget->AddToViewport();
-        }   
+            MyWidget->AddToViewport();
+        }
     }
 }
 ```
