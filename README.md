@@ -10,6 +10,8 @@ Objective: Have a button on the screen that destroys an object in game if presse
 
 - Create an AActor C++ class MyActor and a Blueprint based on that
   - in the BP include a mesh and place it into the world (this will be the object to be destroyed)
+  - in project settings, create a tag "ExplodeActor"
+  - in the actor BP, create a new tag "ExplodeActor"
 - Create a PlayerController C++ class MyPlayerController and a Blueprint based on that
 - Create a WidgetBlueprint: Right click > User Interface > Widget Blueprint
 - Create a Blueprint based on the game's GameModeBase
@@ -36,7 +38,7 @@ Objective: Have a button on the screen that destroys an object in game if presse
 ### GameModeBase Class:
 - In the header file,
 - Define BeginPlay()
-- declare a variable to be a reference to the class type UUserWidget and expose it to the GameModeBase Blueprint
+- declare a variable to be a reference to the class type UUserWidget and expose it to the GameModeBase Blueprint so that we can associate it to our widget. 
   
 ```cpp
 #include "Blueprint/UserWidget.h"
@@ -82,10 +84,12 @@ void AExplodeButtonGameModeBase::BeginPlay()
 }
 ```
 
-- In BP_ExplodeButtonGameModeBase, in My User Widget Class Type, select my BP_WidgetBlueprint to make sure the GameMode creates a widget based on the blueprint I am going to customize.
+- In BP_ExplodeButtonGameModeBase, in the My User Widget Class Type field, select my BP_WidgetBlueprint to make sure the GameMode creates a widget based on the blueprint I am going to customize.
 
 ### MyPlayerController Class:
-- In MyPlayerController header file, declare BeginPlay(), declare an object of type MyActor and a Array of Actors and declare a DestroyActor() function and make it callable from the blueprints - so that we can call it from the actor blueprint to destroy it.
+- In MyPlayerController header file, declare BeginPlay(),
+- declare an object of type MyActor and a Array of Actors
+- declare a DestroyActor() function and make it callable from the blueprints - so that we can call it from the actor blueprint to destroy it.
   
 ```cpp
 #include "MyActor.h"
@@ -118,8 +122,8 @@ private:
   - OnBeginPlay(),
     - set input mode to be for both game and UI (to allow the player to both control the pawn and click on the screen),
     - set cursor to be visible,
-    - get all actors of class AActor and store the first one in the array of actors,
-    - Save the first actor of the array into an AActor variable (because, for this example, there will only be one actor in the world)
+    - get all actors with tag "ExplodeActor" and store the first one in the array of actors,
+    - Save the first actor of the array into an AActor variable
     - define DestroyActor() using the actor object and calling the Destroy() function on it
 ```cpp
 #include "Kismet/GameplayStatics.h"
@@ -136,21 +140,32 @@ void AMyPlayerController::BeginPlay()
 
     bShowMouseCursor = true;
 
-    UGameplayStatics::GetAllActorsOfClass(GetWorld(), MyActorClassType, MyActorArray); 
+    UGameplayStatics::GetAllActorsWithTag(GetWorld(), "ExplodeActor", MyActorArray);
 
-    MyActor = Cast<AMyActor>(MyActorArray[0]);
+    if (MyActorArray.Num() > 0)
+    {
+
+        MyActor = Cast<AMyActor>(MyActorArray[0]);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("MyActorArray = EMPTY !!!"))
+    }
+    
 }
 
 void AMyPlayerController::DestroyActor()
 {
+    UE_LOG(LogTemp, Warning, TEXT("ACTOR DESTROYED !!!"))
+
     MyActor->Destroy();
 }
-
 ```
 
 ### MyWidget Class:
 - In the widget Blueprint, include a button and customize it
-- Add a OnClicked event. On the Event graph get the player controller and call its function Destroy() OnClicked.
+- Add a OnClicked event.
+  - On the Event graph get the player controller and call its function Destroy() OnClicked.
 
 ![image](https://user-images.githubusercontent.com/12215115/234550380-e3964928-49ef-45d0-9457-798d54eed947.png)
 
